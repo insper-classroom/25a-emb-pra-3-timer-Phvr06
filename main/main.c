@@ -88,24 +88,24 @@ int main() {
 
             while (end_time == 0) {
                 if (alarm_fired) {
+                    alarm_fired = 0;
                     cancel_alarm(alarm);
-                    datetime_t t = {0};
                     rtc_get_datetime(&t);
                     char datetime_buf[256];
                     char *datetime_str = &datetime_buf[0];
                     datetime_to_str(datetime_str, sizeof(datetime_buf), &t);
                     printf("%s - Falha\n", datetime_str);
+                    break;
                 } 
-                break;
             }
 
 
             if (end_time != 0) {
+                alarm_fired = 0;
                 cancel_alarm(alarm);
                 dt = end_time - start_time;
                 distance = (dt * 0.0343) / 2;
 
-                datetime_t t = {0};
                 rtc_get_datetime(&t);
                 char datetime_buf[256];
                 char *datetime_str = &datetime_buf[0];
