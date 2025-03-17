@@ -111,7 +111,11 @@ int main() {
                 char *datetime_str = &datetime_buf[0];
                 datetime_to_str(datetime_str, sizeof(datetime_buf), &t);
 
-                printf("%s - %.2f\n", datetime_str, distance);
+                if (distance <= 300) {
+                    printf("%s - %.2f\n", datetime_str, distance);
+                } else {
+                    printf("%s - Falha\n", datetime_str);
+                }
             }
 
             c = getchar_timeout_us(100);
